@@ -80,15 +80,15 @@
     
             // Cek apakah foto baru diupload
             if (isset($_FILES['newPhoto']) && $_FILES['newPhoto']['error'] == 0) {
-                $targetDir = "up_gambar/"; // Ubah sesuai folder Anda
+                $targetDir = "up_gambar/"; 
                 $targetFile = $targetDir . basename($_FILES["newPhoto"]["name"]);
                 if (move_uploaded_file($_FILES["newPhoto"]["tmp_name"], $targetFile)) {
-                    // Update data sewa dengan foto baru
+                    
                     $stmt = $conn->prepare("UPDATE sewa SET photo = ? WHERE ps_id = ? AND user_id = (SELECT id FROM user WHERE username = ?)");
                     $stmt->bind_param('sis', $targetFile, $updateId, $currentUser);
                     $stmt->execute();
     
-                    header("Location: index.php"); // Redirect untuk menyegarkan halaman
+                    header("Location: index.php"); 
                     exit; 
                 } else {
                     echo "Error uploading file.";
@@ -104,7 +104,6 @@
         }
     }
 
-    // Handle detail popup
     $detailPs = null;
     if (isset($_GET['id'])) {
         $psId = $_GET['id'];
