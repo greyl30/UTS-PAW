@@ -4,7 +4,7 @@
 
     // Cek login
     if (isset($_SESSION['login'])) {
-        header('location: sewa.php');
+        header('location: index.php');
         exit;
     }
 
@@ -35,7 +35,7 @@
 
             if ($user && password_verify($password, $user['password'])) {
                 $_SESSION['login'] = $username;
-                header('location: sewa.php');
+                header('location: index.php');
                 exit;
             } else {
                 $message = "Mohon register terlebih dahulu.";
