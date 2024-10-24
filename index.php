@@ -2,10 +2,13 @@
     session_start();
     require 'db_connect.php';
 
+    // Cek login
     if (!isset($_SESSION['login'])) {
         header('Location: login.php');
         exit;
     }
+
+    $currentUser = $_SESSION['login'];
 
     // Ambil daftar PlayStation dari database
     $stmt = $conn->query("SELECT * FROM ps_list");
@@ -101,6 +104,7 @@
         }
     }
 
+    // Handle detail popup
     $detailPs = null;
     if (isset($_GET['id'])) {
         $psId = $_GET['id'];
